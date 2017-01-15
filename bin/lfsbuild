@@ -6,14 +6,26 @@ import logging
 
 sys.path.insert(0, "./")
 from lfsbuild.task import Task
+from lfsbuild import config
 
 
 logging.basicConfig(level=logging.INFO)
+log = logging.getLogger('BUILD')
+
+# check paths and make them if needed
+paths = [config.CACHE_PATH, config.SOURCE_PATH, config.PATCH_PATH]
+for p in paths:
+    if not os.path.isdir(p):
+        os.mkdir(p)
 
 tasks = {}
-for f in os.listdir('./tasks'):
-    t = Task('tasks/{}'.format(f))
+num_tasks = 0
+for f in os.listdir(config.TASK_PATH):
+    t = Task('{}/{}'.format(config.TASK_PATH, f))
     tasks[t.name] = t
+    num_tasks += 1
+
+log.info('Loaded {} tasks...'.format(num_tasks))
 
 for n, t in tasks.items():
     t.run()
