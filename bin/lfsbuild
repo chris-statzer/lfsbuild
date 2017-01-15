@@ -1,11 +1,18 @@
 #!/usr/bin/env python2.7
 
+cli = """
+Usage:
+    lfsbuild build <package>
+"""
+
 import sys
 import os
 import logging
 
+from docopt import docopt
+
 sys.path.insert(0, "./")
-from lfsbuild.task import Task
+from lfsbuild.task import Task, load_tasks
 from lfsbuild import config
 
 
@@ -13,19 +20,29 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('BUILD')
 
 # check paths and make them if needed
-paths = [config.CACHE_PATH, config.SOURCE_PATH, config.PATCH_PATH]
+paths = [config.CACHE_PATH,
+         config.SOURCE_PATH,
+         config.PATCH_PATH,
+         config.BUILD_PATH]
 for p in paths:
     if not os.path.isdir(p):
         os.mkdir(p)
 
-tasks = {}
-num_tasks = 0
-for f in os.listdir(config.TASK_PATH):
-    t = Task('{}/{}'.format(config.TASK_PATH, f))
-    tasks[t.name] = t
-    num_tasks += 1
+# load all the tasks into a dict
+tasks = load_tasks()
 
-log.info('Loaded {} tasks...'.format(num_tasks))
 
-for n, t in tasks.items():
-    t.run()
+def build(package):
+    if package in tasks:
+        tasks[package].run()
+    else:
+        log.error('Package {} not found!'.format(package))
+
+
+if __name__ == '__main__':
+    arguments = docopt(cli)
+    if arguments['build']:
+        build(arguments['<package>'])
+
+    #for n, t in tasks.items():
+    #    t.run()
