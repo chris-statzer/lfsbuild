@@ -1,0 +1,9 @@
+{
+  "name": "bc_download",
+  "type": "download",
+  "urls": [{
+    "type": "src",
+    "url": "http://alpha.gnu.org/gnu/bc/bc-1.06.95.tar.bz2",
+    "md5": "5126a721b73f97d715bb72c13c889035"
+    }]
+}

@@ -1,0 +1,5 @@
+{
+  "name": "binutils_pass1",
+  "type": "build",
+  "deps": ["binutils_download"]
+}
