@@ -3,11 +3,15 @@
 cli = """
 Usage:
     lfsbuild build <package>
+    lfsbuild list
 """
 
 import sys
 import os
 import logging
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger('BUILD')
 
 from docopt import docopt
 
@@ -15,18 +19,6 @@ sys.path.insert(0, "./")
 from lfsbuild.task import Task, load_tasks
 from lfsbuild import config
 
-
-logging.basicConfig(level=logging.INFO)
-log = logging.getLogger('BUILD')
-
-# check paths and make them if needed
-paths = [config.CACHE_PATH,
-         config.SOURCE_PATH,
-         config.PATCH_PATH,
-         config.BUILD_PATH]
-for p in paths:
-    if not os.path.isdir(p):
-        os.mkdir(p)
 
 # load all the tasks into a dict
 tasks = load_tasks()
@@ -38,11 +30,13 @@ def build(package):
     else:
         log.error('Package {} not found!'.format(package))
 
+def list_packages():
+    for t in tasks:
+        print t
 
 if __name__ == '__main__':
     arguments = docopt(cli)
     if arguments['build']:
         build(arguments['<package>'])
-
-    #for n, t in tasks.items():
-    #    t.run()
+    elif arguments['list']:
+        list_packages()

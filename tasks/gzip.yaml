@@ -4,3 +4,4 @@ deps: []
 src_uri: http://ftp.gnu.org/gnu/gzip/gzip-1.8.tar.xz
 md5: f7caabb65cddc1a4165b398009bd05b9
 dir_name: gzip-1.8
+config_opts: --prefix=/tools --with-sysroot=$LFS --with-lib-path=/tools/lib --target=$LFS_TGT --disable-nls --disable-werror

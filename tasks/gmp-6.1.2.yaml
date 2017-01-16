@@ -1,0 +1,6 @@
+name: gmp-6.1.2
+description: GNU GMP 6.1.2 (Download only)
+deps: []
+src_uri: http://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.xz
+md5: f58fa8001d60c4c77595fbbb62b63c1d
+dir_name: gmp-6.1.2
