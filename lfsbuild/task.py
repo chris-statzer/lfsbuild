@@ -72,6 +72,9 @@ class Task(object):
             log.info('Compiling {} with following options: {}'.format(self.name, configure_args))
             os.system(configure_cmd)
             os.system('make {}'.format(config.MAKE_OPTS))
+            log.info('Installing {}....'.format(self.name))
+            os.system('make install')
+        os.chdir(config.ROOT_PATH)
 
     @property
     def name(self):
