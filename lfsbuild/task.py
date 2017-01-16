@@ -61,6 +61,11 @@ class Task(object):
         
         # process actions 
         if self.action == 'build':
+            # check for premake_commands
+            if 'preconfigure_commands' in self.data:
+                for pcc in self.data['preconfigure_commands']:
+                    log.info('Running preconfigure command: \n\r{}'.format(pcc))
+                    os.system(pcc)
             # configure
             configure_args = string.Template(self.config_opts).safe_substitute(config.CONFIGURE_VARS)
             # custom configure command
@@ -93,6 +98,12 @@ class Task(object):
                     log.info('Running preinstall command: \n\r{}'.format(pic))
                     os.system(pic)
             os.system('make install')
+            
+            # check for post_install_commands
+            if 'postinstall_commands' in self.data:
+                for pic in self.data['postinstall_commands']:
+                    log.info('Running postinstall command: \n\r{}'.format(pic))
+                    os.system(pic)
         
         elif self.action == 'custom_commands':
             for cc in self.data['commands']:

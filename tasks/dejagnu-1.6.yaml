@@ -1,0 +1,10 @@
+name: dejagnu-1.6
+description: DejaGNU 1.6
+deps: []
+action: build
+src_uri: http://ftp.gnu.org/gnu/dejagnu/dejagnu-1.6.tar.gz
+md5: 1fdc2eb0d592c4f89d82d24dfdf02f0b
+dir_name: dejagnu-1.6
+config_opts: --prefix=/tools
+postinstall_commands:
+  - make check

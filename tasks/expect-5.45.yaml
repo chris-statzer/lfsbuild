@@ -1,0 +1,16 @@
+name: expect-5.45
+description: Expect 5.45
+deps: []
+action: build
+src_uri: http://prdownloads.sourceforge.net/expect/expect5.45.tar.gz
+md5: 44e1a4f4c877e9ddc5a542dfa7ecc92b
+dir_name: expect5.45
+preconfigure_commands:
+  - cp -v configure{,.orig}
+  - sed 's:/usr/local/bin:/bin:' configure.orig > configure
+config_opts: >
+  --prefix=/tools
+  --with-tcl=/tools/lib
+  --with-tclinclude=/tools/include
+preinstall_commands:
+  - make test

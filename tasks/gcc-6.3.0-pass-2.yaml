@@ -1,4 +1,4 @@
-name: gcc-6.3.0-pass-1
+name: gcc-6.3.0-pass-2
 description: GNU GCC 6.3.0 (First Pass)
 deps:
 #  - binutils-2.27-pass-1
@@ -9,32 +9,23 @@ action: build
 src_uri: http://ftp.gnu.org/gnu/gcc/gcc-6.3.0/gcc-6.3.0.tar.bz2
 md5: 677a7623c7ef6ab99881bc4e048debb6
 dir_name: gcc-6.3.0
+config_env_vars: CC=$LFS_TGT-gcc CXX=$LFS_TGT-g++ AR=$LFS_TGT-ar RANLIB=$LFS_TGT-ranlib
 config_opts: >
-  --target=$LFS_TGT 
-  --prefix=/tools 
-  --with-glibc-version=2.23 
-  --with-sysroot=$LFS 
-  --with-newlib 
-  --without-headers 
-  --with-local-prefix=/tools 
-  --with-native-system-header-dir=/tools/include 
-  --disable-nls
-  --disable-shared 
-  --disable-multilib 
-  --disable-decimal-float 
-  --disable-threads 
-  --disable-libatomic 
-  --disable-libgomp 
-  --disable-libmpx 
-  --disable-libquadmath
-  --disable-libssp 
-  --disable-libvtv 
-  --disable-libstdcxx 
+  --prefix=/tools
+  --with-local-prefix=/tools
+  --with-native-system-header-dir=/tools/include
   --enable-languages=c,c++
+  --disable-libstdcxx-pch
+  --disable-multilib
+  --disable-bootstrap
+  --disable-libgomp
 preconfigure_commands:
   - ln -s ../../src/gmp-6.1.2 ../../src/gcc-6.3.0/gmp
   - ln -s ../../src/mpfr-3.1.5 ../../src/gcc-6.3.0/mpfr
   - ln -s ../../src/mpc-1.0.3 ../../src/gcc-6.3.0/mpc
+  - |
+    cd ../../src/gcc-6.3.0
+    cat gcc/limitx.h gcc/glimits.h gcc/limity.h > `dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/include-fixed/limits.h
   - |
     cd ../../src/gcc-6.3.0
     cat > fix-head.sh << "EOF"
@@ -63,3 +54,5 @@ preconfigure_commands:
     esac
     EOF
     bash fix-lib.sh
+postinstall_commands:
+  - ln -sv gcc /tools/bin/cc

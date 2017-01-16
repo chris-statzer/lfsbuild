@@ -13,4 +13,8 @@ config_opts: >
   --target=$LFS_TGT 
   --disable-nls 
   --disable-werror
+postinstall_commands:
+  - make -C ld clean
+  - make -C ld LIB_PATH=/usr/lib:/lib
+  - cp -v ld/ld-new /tools/bin
 

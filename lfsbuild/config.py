@@ -13,7 +13,7 @@ BUILD_PATH = 'build'
 MAKE_OPTS = '-j 4'
 
 CONFIGURE_VARS = {
-    'LFS': ROOT_PATH + '/lfs-out',
+    'LFS': '/mnt/lfs',
     'LFS_TGT': 'x86_64-lfs-linux-gnu'}
 
 # check paths and make them if needed

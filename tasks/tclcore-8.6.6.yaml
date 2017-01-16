@@ -1,0 +1,18 @@
+name: tcl-core-8.6.6
+description: Tcl core 8.6.6
+deps: []
+action: build
+src_uri: http://sourceforge.net/projects/tcl/files/Tcl/8.6.6/tcl-core8.6.6-src.tar.gz
+md5: 98ebf13bbd90257e006c219369dd5f67
+dir_name: tcl8.6.6
+custom_configure_command: ./unix/configure
+config_opts: --prefix=/tools
+preconfigure_commands:
+  - cp -rv ../../src/tcl8.6.6/* .
+preinstall_commands:
+  - TZ=UTC make test
+postinstall_commands:
+  - chmod -v u+w /tools/lib/libtcl8.6.so
+  - make install-private-headers
+  - ln -sv tclsh8.6 /tools/bin/tclsh
+
