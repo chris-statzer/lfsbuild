@@ -1,10 +1,11 @@
-name: binutils-2.27-pass-1
-description: GNU Binutils 2.27 (First Pass)
+name: binutils-2.27-pass-2
+description: GNU Binutils 2.27 (Second Pass)
 deps: []
 action: build
 src_uri: http://ftp.gnu.org/gnu/binutils/binutils-2.27.tar.bz2
 md5: 2869c9bf3e60ee97c74ac2a6bf4e9d68
 dir_name: binutils-2.27
+config_env_vars: CC=$LFS_TGT-gcc AR=$LFS_TGT-ar RANLIB=$LFS_TGT-ranlib     
 config_opts: >
   --prefix=/tools 
   --with-sysroot=$LFS 
@@ -12,11 +13,4 @@ config_opts: >
   --target=$LFS_TGT 
   --disable-nls 
   --disable-werror
-preinstall_commands:
-  - |
-    cat > link-lib.sh << "EOF"
-    case $(uname -m) in
-      x86_64) mkdir -v /tools/lib && ln -sv lib /tools/lib64 ;;
-    esac
-    EOF
-    bash link-lib.sh
+

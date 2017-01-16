@@ -1,0 +1,13 @@
+name: linux-headers-pass-1
+description: Linux Headers (pass 1) 4.7.2
+deps: []
+action: custom_commands
+src_uri: https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.7.2.tar.xz
+md5: ae493473d074185205a54bc8ad49c3b4
+dir_name: linux-headers-pass-1
+commands:
+  - cp -rv ../../src/linux-4.7.2/* .
+  - make mrproper
+  - make INSTALL_HDR_PATH=dest headers_install
+  - cp -rv dest/include/* /tools/include
+

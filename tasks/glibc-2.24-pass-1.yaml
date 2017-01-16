@@ -1,0 +1,16 @@
+name: glibc-2.24-pass-1
+description: GNU Glibc 2.24 (First Pass)
+deps: []
+action: build
+src_uri: http://ftp.gnu.org/gnu/glibc/glibc-2.24.tar.xz
+md5: 97dc5517f92016f3d70d83e3162ad318
+dir_name: glibc-2.24
+config_opts: >
+  --prefix=/tools
+  --host=$LFS_TGT
+  --build=$(../scripts/config.guess)
+  --enable-kernel=2.6.32
+  --with-headers=/tools/include
+  libc_cv_forced_unwind=yes
+  libc_cv_c_cleanup=yes
+

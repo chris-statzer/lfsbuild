@@ -14,7 +14,7 @@ MAKE_OPTS = '-j 4'
 
 CONFIGURE_VARS = {
     'LFS': ROOT_PATH + '/lfs-out',
-    'LFS_TGT': 'x86_64-pc-linux-gnu'}
+    'LFS_TGT': 'x86_64-lfs-linux-gnu'}
 
 # check paths and make them if needed
 paths = [CACHE_PATH,

@@ -22,18 +22,17 @@ class Task(object):
         # print self.data
 
     def run(self):
-        log.info('Running task: << {} >>'.format(self.name))
+        log.info('Running task: <<( {} )>>'.format(self.name))
 
         # check deps
         if 'deps' in self.data:
             for dep in self.data['deps']:
                 tasks[dep].run()
 
+        # Download the package if we dont already have it
         url = self.data['src_uri']
         md5 = self.data['md5']
         filename = url[url.rfind('/')+1:]
-
-        # Download the package if we dont already have it
         if download.download(url, md5) is False:
             return False
 
@@ -52,28 +51,52 @@ class Task(object):
             log.error('Error extracting {}'.format(filename))
             return False
 
+        # delete old build directory if it exists
+        if os.path.isdir(self.build_path):
+            os.system('rm -rf {}'.format(self.build_path))
+        
+        # now create the build path and change to it
+        os.system('mkdir {}'.format(self.build_path))
+        os.chdir(self.build_path)
+        
+        # process actions 
         if self.action == 'build':
-            # delete old build directory if it exists
-            if os.path.isdir(self.build_path):
-                os.system('rm -rf {}'.format(self.build_path))
-
+            # configure
+            configure_args = string.Template(self.config_opts).safe_substitute(config.CONFIGURE_VARS)
+            # custom configure command
+            custom_configure = 'configure'
+            if 'custom_configure_command' in self.data:
+                custom_configure = self.data['custom_configure_command']
+            # configure ENV vars
+            config_env_vars = ''
+            if 'config_env_vars' in self.data:
+                config_env_vars = string.Template(self.data['config_env_vars']).safe_substitute(config.CONFIGURE_VARS)
+            configure_cmd = '{} ../../{}/{} {}'.format(config_env_vars, self.src_path, custom_configure, configure_args)
+            log.info('Compiling {} with following options: {}'.format(self.name, configure_cmd))
+            os.system(configure_cmd)
+            
             # check for premake_commands
             if 'premake_commands' in self.data:
                 for pmc in self.data['premake_commands']:
                     log.info('Running premake command: \n\r{}'.format(pmc))
                     os.system(pmc)
-
-            # now create the build path and change to it
-            os.system('mkdir {}'.format(self.build_path))
-            os.chdir(self.build_path)
-
-            configure_args = string.Template(self.config_opts).safe_substitute(config.CONFIGURE_VARS)
-            configure_cmd = '../../{}/configure {}'.format(self.src_path, configure_args)
-            log.info('Compiling {} with following options: {}'.format(self.name, configure_args))
-            os.system(configure_cmd)
+            
+            # make
+            log.info('Running make on {}...'.format(self.name))
             os.system('make {}'.format(config.MAKE_OPTS))
+
+            # make install
             log.info('Installing {}....'.format(self.name))
+            # check for preinstall_commands
+            if 'preinstall_commands' in self.data:
+                for pic in self.data['preinstall_commands']:
+                    log.info('Running preinstall command: \n\r{}'.format(pic))
+                    os.system(pic)
             os.system('make install')
+        
+        elif self.action == 'custom_commands':
+            for cc in self.data['commands']:
+                os.system(cc)
         os.chdir(config.ROOT_PATH)
 
     @property

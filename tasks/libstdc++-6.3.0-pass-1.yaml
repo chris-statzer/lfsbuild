@@ -1,0 +1,17 @@
+name: libstdc++-6.3.0-pass-1
+description: GNU libstdc++ 6.3.0 (First Pass)
+deps: []
+action: build
+src_uri: http://ftp.gnu.org/gnu/gcc/gcc-6.3.0/gcc-6.3.0.tar.bz2
+md5: 677a7623c7ef6ab99881bc4e048debb6
+dir_name: gcc-6.3.0
+custom_configure_command: libstdc++-v3/configure
+config_opts: >
+  --host=$LFS_TGT
+  --prefix=/tools
+  --disable-multilib
+  --disable-nls
+  --disable-libstdcxx-threads
+  --disable-libstdcxx-pch
+  --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/6.3.0
+
