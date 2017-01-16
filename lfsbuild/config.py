@@ -4,7 +4,7 @@ import logging
 log = logging.getLogger('CONF')
 
 
-ROOT_PATH = '/Users/daspork/repos/lfs-builder'
+ROOT_PATH = '/home/daspork/werk/lfsbuild'
 TASK_PATH = 'tasks'
 CACHE_PATH = 'cache'
 SOURCE_PATH = 'src'

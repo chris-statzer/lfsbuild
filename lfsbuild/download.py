@@ -11,7 +11,7 @@ def download(url, md5):
     filename = url[url.rfind('/')+1:]
     if os.path.isfile('{}/{}'.format(config.CACHE_PATH, filename)):
         log.info('{} exists. Checking md5'.format(filename))
-        cache_md5 = os.popen('md5 -q {}/{}'.format(config.CACHE_PATH, filename)).read().rstrip()
+        cache_md5 = os.popen('md5sum {}/{}'.format(config.CACHE_PATH, filename)).read().split(' ')[0].rstrip()
         if cache_md5 == md5:
             log.info('Good md5 using the cached file.')
             return True
