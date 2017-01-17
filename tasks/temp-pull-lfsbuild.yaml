@@ -1,0 +1,9 @@
+name: temp-pull-lfsbuild
+description: pull a copy of the lfsbuild framework to the host.
+deps: []
+action: custom_commands
+commands:
+  - git clone https://github.com/chris-statzer/lfsbuild
+  - cp -r lfsbuild $LFS
+  - mkdir -pv $LFS/lfsbuild/cache
+  - cp ../../cache/* $LFS/lfsbuild/cache
