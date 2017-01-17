@@ -34,6 +34,7 @@ deps:
   - temp-texinfo-6.3
   - temp-util-linux-2.29
   - temp-xz-5.2.3
+  - temp-python-2.7.13
   - temp-python-setuptools-33.1.1
   - temp-python-docopt-0.6.2
   - temp-python-pyyaml-3.12

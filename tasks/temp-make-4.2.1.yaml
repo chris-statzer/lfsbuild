@@ -6,5 +6,5 @@ src_uri: http://ftp.gnu.org/gnu/make/make-4.2.1.tar.bz2
 md5: 15b012617e7c44c0ed482721629577ac
 dir_name: make-4.2.1
 config_opts: --prefix=/tools --without-guile
-preinstall_commands:
- - make check
+#preinstall_commands:
+# - make check
