@@ -7,3 +7,10 @@ deps:
   - glibc-2.24-pass-1
   - libstdc++-6.3.0-pass-1
   - binutils-2.27-pass-2
+  - gcc-6.3.0-pass-2
+  - tcl-core-8.6.6
+  - expect-5.45
+  - dejagnu-1.6
+  - check-0.10.0
+  - ncurses-6.0
+  - bash-4.4

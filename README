@@ -12,5 +12,8 @@ Building
 * make sure LFS and LFS_TGT are defined in the env
 * link LFS to /tools
 * add /tools/bin to the path
+* fix /bin/sh symlink "sudo update-alternatives --install /bin/sh sh /bin/bash 100"
 * check versions with supplied script
 * install build-essential, gawk, texinfo, bison
+* install python packages pyyaml, docopt
+* "./bin lfsbuild bootstrap-build-system"

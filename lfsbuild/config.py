@@ -9,6 +9,9 @@ if not 'LFS' in os.environ:
 if not 'LFS_TGT' in os.environ:
     raise EnvironmentError('LFS missing from enviornment!')
 
+os.environ['PATH'] = '/tools/bin' + os.environ['PATH']
+print os.environ['PATH']
+
 
 ROOT_PATH = '/home/daspork/repos/lfsbuild'
 TASK_PATH = 'tasks'
