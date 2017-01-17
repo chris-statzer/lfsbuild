@@ -9,6 +9,6 @@ cache_path: cache
 source_path: src
 patch_path: patch
 build_path: build
-backup_path: backup
+backup_path: backupio
 db_path: db
 make_opts: -j2

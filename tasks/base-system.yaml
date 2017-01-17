@@ -1,0 +1,7 @@
+
+name: base-system
+description: Metapackage to build the base LFS system
+action: meta
+deps:
+  - base-filesystem
+  - base-linux-headers-4.7.2
