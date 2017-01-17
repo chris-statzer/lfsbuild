@@ -38,3 +38,4 @@ deps:
   - temp-python-docopt-0.6.2
   - temp-python-pyyaml-3.12
   - temp-pull-lfsbuild
+  - temp-change-ownership

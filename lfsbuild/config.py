@@ -23,6 +23,7 @@ CACHE_PATH = 'cache'
 SOURCE_PATH = 'src'
 PATCH_PATH = 'patch'
 BUILD_PATH = 'build'
+BACKUP_PATH = 'backup'
 DB_PATH = 'db'
 MAKE_OPTS = '-j 4'
 
@@ -36,7 +37,8 @@ paths = [CACHE_PATH,
          PATCH_PATH,
          BUILD_PATH,
          DB_PATH,
-         DB_PATH + '/installed']
+         DB_PATH + '/installed',
+         BACKUP_PATH]
 for p in paths:
     if not os.path.isdir(p):
         log.info('Creating missing path: {}'.format(p))
