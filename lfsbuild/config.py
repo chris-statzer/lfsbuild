@@ -4,10 +4,10 @@ import logging
 log = logging.getLogger('CONF')
 
 if not 'LFS' in os.environ:
-    raise EnvironmentError('LFS missing from enviornment!')
+    os.environ['LFS'] = '/mnt/lfs'
 
 if not 'LFS_TGT' in os.environ:
-    raise EnvironmentError('LFS missing from enviornment!')
+    os.environ['LFS_TGT'] = 'x86_64-lfs-linux-gnu'
 
 os.environ['LC_ALL'] = 'POSIX'
 
