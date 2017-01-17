@@ -1,0 +1,9 @@
+name: bootstrap-build-system
+description: Metapackage to boostrap the LFS system
+deps:
+  - binutils-2.27-pass-1
+  - gcc-6.3.0-pass-1
+  - linux-headers-pass-1
+  - glibc-2.24-pass-1
+  - libstdc++-6.3.0-pass-1
+  - binutils-2.27-pass-2

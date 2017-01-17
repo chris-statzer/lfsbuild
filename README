@@ -1,6 +1,16 @@
-This is a WIP build framework for the awesome Linux from Scratch project. The 
-goal is to provide an automated way to build the initial system and get a 
-working bootable disk. The host target is currently Ubuntu 16.04 LTS.
+This is a WIP build framework for the awesome Linux from Scratch project. The
+goal is to provide an automated way to build the initial system and get a
+working bootable disk. The host target is currently Ubuntu 16.04 LTS as a known
+good host.
 
 A further goal will be to use the built Python framework to also manage packages
 for BLFS too.
+
+Building
+
+* Mount drive
+* make sure LFS and LFS_TGT are defined in the env
+* link LFS to /tools
+* add /tools/bin to the path
+* check versions with supplied script
+* install build-essential, gawk, texinfo, bison

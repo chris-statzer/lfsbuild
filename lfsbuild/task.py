@@ -30,85 +30,97 @@ class Task(object):
                 tasks[dep].run()
 
         # Download the package if we dont already have it
-        url = self.data['src_uri']
-        md5 = self.data['md5']
-        filename = url[url.rfind('/')+1:]
-        if download.download(url, md5) is False:
-            return False
+        if 'src_uri' in self.data:
+            url = self.data['src_uri']
+            md5 = self.data['md5']
+            filename = url[url.rfind('/')+1:]
+            if download.download(url, md5) is False:
+                return False
 
-        # extract the package to the src directory
-        tar_flags = ''
-        if url[-2:] == 'gz':
-            tar_flags = 'xzf'
-        elif url[-2:] == 'xz':
-            tar_flags = 'xJf'
-        elif url[-3:] == 'bz2':
-            tar_flags = 'xjf'
-        extract_cmd = 'tar {} {}/{} -C {}'.format(tar_flags, config.CACHE_PATH, filename, config.SOURCE_PATH)
-        log.info('Extracting {} to {}'.format(filename, config.BUILD_PATH))
-        return_code = os.system(extract_cmd)
-        if return_code != 0:
-            log.error('Error extracting {}'.format(filename))
-            return False
+            # extract the package to the src directory
+            tar_flags = ''
+            if url[-2:] == 'gz':
+                tar_flags = 'xzf'
+            elif url[-2:] == 'xz':
+                tar_flags = 'xJf'
+            elif url[-3:] == 'bz2':
+                tar_flags = 'xjf'
+            extract_cmd = 'tar {} {}/{} -C {}'.format(tar_flags, config.CACHE_PATH, filename, config.SOURCE_PATH)
+            log.info('Extracting {} to {}'.format(filename, config.BUILD_PATH))
+            self.run_command(extract_cmd)
 
         # delete old build directory if it exists
         if os.path.isdir(self.build_path):
-            os.system('rm -rf {}'.format(self.build_path))
-        
+            self.run_command('rm -rf {}'.format(self.build_path))
+
         # now create the build path and change to it
-        os.system('mkdir {}'.format(self.build_path))
+        self.run_command('mkdir {}'.format(self.build_path))
         os.chdir(self.build_path)
-        
-        # process actions 
+
+        # process actions
         if self.action == 'build':
-            # check for premake_commands
-            if 'preconfigure_commands' in self.data:
-                for pcc in self.data['preconfigure_commands']:
-                    log.info('Running preconfigure command: \n\r{}'.format(pcc))
-                    os.system(pcc)
             # configure
-            configure_args = string.Template(self.config_opts).safe_substitute(config.CONFIGURE_VARS)
+            # check for preconfigure_commands
+            self.run_command_list('preconfigure_commands')
+
             # custom configure command
             custom_configure = 'configure'
             if 'custom_configure_command' in self.data:
                 custom_configure = self.data['custom_configure_command']
+
             # configure ENV vars
             config_env_vars = ''
             if 'config_env_vars' in self.data:
-                config_env_vars = string.Template(self.data['config_env_vars']).safe_substitute(config.CONFIGURE_VARS)
-            configure_cmd = '{} ../../{}/{} {}'.format(config_env_vars, self.src_path, custom_configure, configure_args)
+                config_env_vars = self.data['config_env_vars']
+
+            # Format and run configure
+            configure_cmd = '{} ../../{}/{} {}'.format(config_env_vars, self.src_path, custom_configure, self.config_opts)
             log.info('Compiling {} with following options: {}'.format(self.name, configure_cmd))
-            os.system(configure_cmd)
-            
-            # check for premake_commands
-            if 'premake_commands' in self.data:
-                for pmc in self.data['premake_commands']:
-                    log.info('Running premake command: \n\r{}'.format(pmc))
-                    os.system(pmc)
-            
+            self.run_command(configure_cmd)
+
+            # check for postconfigure_commands
+            self.run_command_list('postconfigure_commands')
+
             # make
+            # check for premake_commands
+            self.run_command_list('premake_commands')
+
+            # format and run make
             log.info('Running make on {}...'.format(self.name))
-            os.system('make {}'.format(config.MAKE_OPTS))
+            self.run_command('make {}'.format(config.MAKE_OPTS))
+
+            # check for postmake_commands
+            self.run_command_list('postmake_commands')
 
             # make install
             log.info('Installing {}....'.format(self.name))
+
             # check for preinstall_commands
-            if 'preinstall_commands' in self.data:
-                for pic in self.data['preinstall_commands']:
-                    log.info('Running preinstall command: \n\r{}'.format(pic))
-                    os.system(pic)
-            os.system('make install')
-            
+            self.run_command_list('preinstall_commands')
+
+            # Run make install
+            self.run_command('make install')
+
             # check for post_install_commands
-            if 'postinstall_commands' in self.data:
-                for pic in self.data['postinstall_commands']:
-                    log.info('Running postinstall command: \n\r{}'.format(pic))
-                    os.system(pic)
-        
+            self.run_command_list('postinstall_commands')
+
         elif self.action == 'custom_commands':
-            for cc in self.data['commands']:
-                os.system(cc)
+            self.run_command_list('commands')
+
+        # clean up and change the directory back to root
         os.chdir(config.ROOT_PATH)
+
+    def run_command(self, cmd):
+        return_code = os.system(cmd)
+        if return_code != 0:
+            log.error('Nonzero return from command: {}'.format(cmd))
+            exit()
+
+    def run_command_list(self, list_name):
+        if list_name in self.data:
+            for cmd in self.data[list_name]:
+                log.info('Running {} command: \n\r{}'.format(list_name, cmd))
+                self.run_command(cmd)
 
     @property
     def name(self):

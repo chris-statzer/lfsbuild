@@ -3,8 +3,14 @@ import logging
 
 log = logging.getLogger('CONF')
 
+if not 'LFS' in os.environ:
+    raise EnvironmentError('LFS missing from enviornment!')
 
-ROOT_PATH = '/home/daspork/werk/lfsbuild'
+if not 'LFS_TGT' in os.environ:
+    raise EnvironmentError('LFS missing from enviornment!')
+
+
+ROOT_PATH = '/home/daspork/repos/lfsbuild'
 TASK_PATH = 'tasks'
 CACHE_PATH = 'cache'
 SOURCE_PATH = 'src'
