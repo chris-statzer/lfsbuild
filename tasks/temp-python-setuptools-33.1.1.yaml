@@ -1,0 +1,11 @@
+name: temp-python-setuptools-33.1.1
+description: setuptools python module 33.1.1
+deps: []
+action: custom_commands
+src_uri: https://github.com/pypa/setuptools/archive/v33.1.1.tar.gz
+md5: 6f325e870730cd90f3ac9608cdf6a82f
+dir_name: setuptools-33.1.1
+commands:
+  - cp -rT ../../src/setuptools-33.1.1/ .
+  - /tools/bin/python bootstrap.py
+  - /tools/bin/python setup.py install

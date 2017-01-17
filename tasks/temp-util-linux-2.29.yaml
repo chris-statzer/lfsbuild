@@ -1,0 +1,14 @@
+name: temp-util-linux-2.29
+description: Util-linux-2.29
+deps: []
+action: build
+src_uri: https://www.kernel.org/pub/linux/utils/util-linux/v2.29/util-linux-2.29.tar.xz
+md5: 07b6845f48a421ad5844aa9d58edb837
+dir_name: util-linux-2.29
+config_opts: >
+  --prefix=/tools
+  --without-python
+  --disable-makeinstall-chown
+  --without-systemdsystemunitdir
+  --without-udev
+  PKG_CONFIG=""

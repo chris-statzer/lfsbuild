@@ -1,0 +1,8 @@
+name: temp-python-2.7.13
+description: Python 2.7.13
+deps: []
+action: build
+src_uri: https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tar.xz
+md5: 53b43534153bb2a0363f08bae8b9d990
+dir_name: Python-2.7.13
+config_opts: --prefix=/tools

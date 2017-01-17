@@ -18,6 +18,7 @@ deps:
   - temp-bzip2-1.0.6
   - temp-coreutils-8.26
   - temp-diffutils-3.5
+  - temp-zlib-1.2.10
   - temp-file-5.29
   - temp-findutils-4.6.0
   - temp-gawk-4.1.4
@@ -25,3 +26,14 @@ deps:
   - temp-grep-2.27
   - temp-gzip-1.8
   - temp-m4-1.4.18
+  - temp-make-4.2.1
+  - temp-patch-2.7.5
+  - temp-perl-5.24.0
+  - temp-sed-4.3
+  - temp-tar-1.29
+  - temp-texinfo-6.3
+  - temp-util-linux-2.29
+  - temp-xz-5.2.3
+  - temp-python-setuptools-33.1.1
+  - temp-python-docopt-0.6.2
+  - temp-python-pyyaml-3.12

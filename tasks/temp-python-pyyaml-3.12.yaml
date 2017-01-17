@@ -1,0 +1,10 @@
+name: temp-python-pyyaml-3.12
+description: pyyaml python module 3.12
+deps: []
+action: custom_commands
+src_uri: http://pyyaml.org/download/pyyaml/PyYAML-3.12.tar.gz
+md5: 4c129761b661d181ebf7ff4eb2d79950
+dir_name: PyYAML-3.12
+commands:
+  - cp -rT ../../src/PyYAML-3.12/ .
+  - /tools/bin/python setup.py install
