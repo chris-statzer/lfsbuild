@@ -1,5 +1,6 @@
 name: bootstrap-build-system
 description: Metapackage to boostrap the LFS system
+action: meta
 deps:
   - binutils-2.27-pass-1
   - gcc-6.3.0-pass-1
@@ -14,3 +15,13 @@ deps:
   - check-0.10.0
   - ncurses-6.0
   - bash-4.4
+  - temp-bzip2-1.0.6
+  - temp-coreutils-8.26
+  - temp-diffutils-3.5
+  - temp-file-5.29
+  - temp-findutils-4.6.0
+  - temp-gawk-4.1.4
+  - temp-gettext-0.19.8.1
+  - temp-grep-2.27
+  - temp-gzip-1.8
+  - temp-m4-1.4.18

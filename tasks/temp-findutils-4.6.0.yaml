@@ -1,0 +1,10 @@
+name: temp-findutils-4.6.0
+description: GNU Findutils 4.6.0
+deps: []
+action: build
+src_uri: http://ftp.gnu.org/gnu/findutils/findutils-4.6.0.tar.gz
+md5: 9936aa8009438ce185bea2694a997fc1
+dir_name: findutils-4.6.0
+config_opts: --prefix=/tools
+preinstall_commands:
+  - make check

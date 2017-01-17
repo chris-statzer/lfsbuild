@@ -1,0 +1,10 @@
+name: temp-coreutils-8.26
+description: Coreutils 8.26
+deps: []
+action: build
+src_uri: http://ftp.gnu.org/gnu/coreutils/coreutils-8.26.tar.xz
+md5: d5aa2072f662d4118b9f4c63b94601a6
+dir_name: coreutils-8.26
+config_opts: --prefix=/tools --enable-install-program=hostname
+preinstall_commands:
+  - make RUN_EXPENSIVE_TESTS=yes check

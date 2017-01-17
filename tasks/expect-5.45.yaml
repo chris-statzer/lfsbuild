@@ -6,8 +6,10 @@ src_uri: http://prdownloads.sourceforge.net/expect/expect5.45.tar.gz
 md5: 44e1a4f4c877e9ddc5a542dfa7ecc92b
 dir_name: expect5.45
 preconfigure_commands:
-  - cp -v configure{,.orig}
+  - cp ../../src/expect5.45/configure .
+  - cp -v configure{,.orig} &
   - sed 's:/usr/local/bin:/bin:' configure.orig > configure
+  - cp ./configure ../../src/expect5.45
 config_opts: >
   --prefix=/tools
   --with-tcl=/tools/lib

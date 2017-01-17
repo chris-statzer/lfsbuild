@@ -1,0 +1,17 @@
+name: temp-gettext-0.19.8.1
+description: GNU Gettext 0.19.8.1
+deps: []
+action: build
+src_uri: http://ftp.gnu.org/gnu/gettext/gettext-0.19.8.1.tar.xz
+md5: df3f5690eaa30fd228537b00cb7b7590
+dir_name: gettext-0.19.8.1
+config_env_vars: EMACS="no"
+config_opts: --prefix=/tools --disable-shared
+custom_configure_command: ./gettext-tools/configure
+custom_make_command: >
+  make -C gnulib-lib &&
+  make -C intl pluralx.c &&
+  make -C src msgfmt &&
+  make -C src msgmerge &&
+  make -C src xgettext
+custom_install_command: cp -v src/{msgfmt,msgmerge,xgettext} /tools/bin

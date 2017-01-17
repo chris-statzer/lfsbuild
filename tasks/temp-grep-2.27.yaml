@@ -1,0 +1,10 @@
+name: temp-grep-2.27
+description: GNU Grep 2.27
+deps: []
+action: build
+src_uri: http://ftp.gnu.org/gnu/grep/grep-2.27.tar.xz
+md5: 6138dd227c39d4a25f81eea76a44d4cb
+dir_name: grep-2.27
+config_opts: --prefix=/tools
+preinstall_commands:
+ - make check

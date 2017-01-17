@@ -23,6 +23,9 @@ class Task(object):
 
     def run(self):
         log.info('Running task: <<( {} )>>'.format(self.name))
+        if os.path.isfile('{}/installed/{}'.format(config.DB_PATH, self.name)):
+            log.info('{} is already installed skipping!'.format(self.name))
+            return True
 
         # check deps
         if 'deps' in self.data:
@@ -87,7 +90,10 @@ class Task(object):
 
             # format and run make
             log.info('Running make on {}...'.format(self.name))
-            self.run_command('make {}'.format(config.MAKE_OPTS))
+            custom_make_command = 'make {}'.format(config.MAKE_OPTS)
+            if 'custom_make_command' in self.data:
+                custom_make_command = self.data['custom_make_command']
+            self.run_command(custom_make_command)
 
             # check for postmake_commands
             self.run_command_list('postmake_commands')
@@ -99,7 +105,10 @@ class Task(object):
             self.run_command_list('preinstall_commands')
 
             # Run make install
-            self.run_command('make install')
+            custom_install_command = 'make install'
+            if 'custom_install_command' in self.data:
+                custom_install_command = self.data['custom_install_command']
+            self.run_command(custom_install_command)
 
             # check for post_install_commands
             self.run_command_list('postinstall_commands')
@@ -109,6 +118,10 @@ class Task(object):
 
         # clean up and change the directory back to root
         os.chdir(config.ROOT_PATH)
+        # mark package as installed
+        if self.action != 'meta':
+            log.info('Marking {} as installed...'.format(self.name))
+            self.run_command('touch {}/installed/{}'.format(config.DB_PATH, self.name))
 
     def run_command(self, cmd):
         return_code = os.system(cmd)
@@ -121,6 +134,8 @@ class Task(object):
             for cmd in self.data[list_name]:
                 log.info('Running {} command: \n\r{}'.format(list_name, cmd))
                 self.run_command(cmd)
+        else:
+            log.info('No {} to run for {}'.format(list_name, self.name))
 
     @property
     def name(self):
@@ -136,7 +151,10 @@ class Task(object):
 
     @property
     def config_opts(self):
-        return self.data['config_opts']
+        if 'config_opts' in self.data:
+            return self.data['config_opts']
+        else:
+            ''
 
     @property
     def action(self):

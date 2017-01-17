@@ -1,0 +1,10 @@
+name: temp-gawk-4.1.4
+description: GNU Gawk 4.1.4
+deps: []
+action: build
+src_uri: http://ftp.gnu.org/gnu/gawk/gawk-4.1.4.tar.xz
+md5: 4e7dbc81163e60fd4f0b52496e7542c9
+dir_name: gawk-4.1.4
+config_opts: --prefix=/tools
+# preinstall_commands:
+#   - make check

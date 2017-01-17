@@ -1,0 +1,10 @@
+name: temp-file-5.29
+description: File 5.29
+deps: []
+action: build
+src_uri: ftp://ftp.astron.com/pub/file/file-5.29.tar.gz
+md5: b7b57b36b577c9cede2f2d1342203302
+dir_name: file-5.29
+config_opts: --prefix=/tools
+#preinstall_commands:
+#  - make check
