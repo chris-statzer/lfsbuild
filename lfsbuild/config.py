@@ -16,8 +16,9 @@ os.environ['PATH'] = '/tools/bin:' + os.environ['PATH']
 log.info('Current PATH: \n\r{}'.format(os.environ['PATH']))
 
 
-
+# solve this programically
 ROOT_PATH = '/home/daspork/repos/lfsbuild'
+
 TASK_PATH = 'tasks'
 CACHE_PATH = 'cache'
 SOURCE_PATH = 'src'
@@ -27,10 +28,6 @@ BACKUP_PATH = 'backup'
 DB_PATH = 'db'
 MAKE_OPTS = '-j 4'
 
-CONFIGURE_VARS = {
-    'LFS': '/mnt/lfs',
-    'LFS_TGT': 'x86_64-lfs-linux-gnu'}
-
 # check paths and make them if needed
 paths = [CACHE_PATH,
          SOURCE_PATH,
@@ -39,6 +36,7 @@ paths = [CACHE_PATH,
          DB_PATH,
          DB_PATH + '/installed',
          BACKUP_PATH]
+
 for p in paths:
     if not os.path.isdir(p):
         log.info('Creating missing path: {}'.format(p))

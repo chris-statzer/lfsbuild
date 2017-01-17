@@ -1,0 +1,14 @@
+env_vars:
+  LFS: /mnt/lfs
+  LFS_TGT: x86_64-lfs-linux-gnu
+  LC_ALL: POSIX
+add_to_path:
+  - /tools/bin
+task_path: tasks
+cache_path: cache
+source_path: src
+patch_path: patch
+build_path: build
+backup_path: backup
+db_path: db
+make_opts: -j2
