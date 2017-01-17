@@ -1,4 +1,4 @@
-name: mpfr-3.1.5
+name: temp-mpfr-3.1.5
 description: GNU MPFR 3.1.5 (Download only)
 deps: []
 src_uri: http://www.mpfr.org/mpfr-3.1.5/mpfr-3.1.5.tar.xz

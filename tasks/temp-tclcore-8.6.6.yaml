@@ -1,4 +1,4 @@
-name: tcl-core-8.6.6
+name: temp-tcl-core-8.6.6
 description: Tcl core 8.6.6
 deps: []
 action: build
@@ -15,4 +15,3 @@ postinstall_commands:
   - chmod -v u+w /tools/lib/libtcl8.6.so
   - make install-private-headers
   - ln -sv tclsh8.6 /tools/bin/tclsh
-

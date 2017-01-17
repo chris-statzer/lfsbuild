@@ -1,4 +1,4 @@
-name: libstdc++-6.3.0-pass-1
+name: temp-libstdc++-6.3.0-pass-1
 description: GNU libstdc++ 6.3.0 (First Pass)
 deps: []
 action: build
@@ -14,4 +14,3 @@ config_opts: >
   --disable-libstdcxx-threads
   --disable-libstdcxx-pch
   --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/6.3.0
-

@@ -1,4 +1,4 @@
-name: ncurses-6.0
+name: temp-ncurses-6.0
 description: Ncurses 6.0
 deps: []
 action: build

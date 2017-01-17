@@ -1,12 +1,11 @@
-name: check-0.10.0
+name: temp-check-0.10.0
 description: Check 0.10.0
 deps: []
 action: build
 src_uri: http://sourceforge.net/projects/check/files/check/0.10.0/check-0.10.0.tar.gz
 md5: 53c5e5c77d090e103a17f3ed7fd7d8b8
 dir_name: check-0.10.0
-config_env_vars: PKG_CONFIG= 
+config_env_vars: PKG_CONFIG=
 config_opts: --prefix=/tools
 #preinstall_commands:
 #  - make check
-

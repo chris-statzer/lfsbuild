@@ -1,4 +1,4 @@
-name: mpc-1.0.3
+name: temp-mpc-1.0.3
 description: GNU MPC 1.0.3 (Download only)
 deps: []
 src_uri: http://www.multiprecision.org/mpc/download/mpc-1.0.3.tar.gz

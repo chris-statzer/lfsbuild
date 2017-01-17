@@ -1,4 +1,4 @@
-name: bash-4.4
+name: temp-bash-4.4
 description: Bash 4.4
 deps: []
 action: build

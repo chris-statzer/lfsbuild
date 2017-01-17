@@ -1,4 +1,4 @@
-name: gmp-6.1.2
+name: temp-gmp-6.1.2
 description: GNU GMP 6.1.2 (Download only)
 deps: []
 src_uri: http://ftp.gnu.org/gnu/gmp/gmp-6.1.2.tar.xz

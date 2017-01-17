@@ -1,4 +1,4 @@
-name: expect-5.45
+name: temp-expect-5.45
 description: Expect 5.45
 deps: []
 action: build

@@ -1,20 +1,19 @@
-name: binutils-2.27-pass-2
+name: temp-binutils-2.27-pass-2
 description: GNU Binutils 2.27 (Second Pass)
 deps: []
 action: build
 src_uri: http://ftp.gnu.org/gnu/binutils/binutils-2.27.tar.bz2
 md5: 2869c9bf3e60ee97c74ac2a6bf4e9d68
 dir_name: binutils-2.27
-config_env_vars: CC=$LFS_TGT-gcc AR=$LFS_TGT-ar RANLIB=$LFS_TGT-ranlib     
+config_env_vars: CC=$LFS_TGT-gcc AR=$LFS_TGT-ar RANLIB=$LFS_TGT-ranlib
 config_opts: >
-  --prefix=/tools 
-  --with-sysroot=$LFS 
-  --with-lib-path=/tools/lib 
-  --target=$LFS_TGT 
-  --disable-nls 
+  --prefix=/tools
+  --with-sysroot=$LFS
+  --with-lib-path=/tools/lib
+  --target=$LFS_TGT
+  --disable-nls
   --disable-werror
 postinstall_commands:
   - make -C ld clean
   - make -C ld LIB_PATH=/usr/lib:/lib
   - cp -v ld/ld-new /tools/bin
-

@@ -1,4 +1,4 @@
-name: dejagnu-1.6
+name: temp-dejagnu-1.6
 description: DejaGNU 1.6
 deps: []
 action: build

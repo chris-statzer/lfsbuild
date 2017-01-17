@@ -1,4 +1,4 @@
-name: glibc-2.24-pass-1
+name: temp-glibc-2.24-pass-1
 description: GNU Glibc 2.24 (First Pass)
 deps: []
 action: build
@@ -13,4 +13,3 @@ config_opts: >
   --with-headers=/tools/include
   libc_cv_forced_unwind=yes
   libc_cv_c_cleanup=yes
-
